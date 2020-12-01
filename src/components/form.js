@@ -1,5 +1,12 @@
 import React, { useState } from "react";
 import Input from "./input";
+import Button from "./button";
+
+const formStyles = {
+  width: "50%",
+  margin: "30px auto",
+  padding: "0"
+};
 
 const Form = () => {
   const emptyForm = {
@@ -18,7 +25,7 @@ const Form = () => {
   };
 
   return (
-    <form>
+    <form style={formStyles}>
       <Input
         name="username"
         label="Username"
@@ -33,7 +40,7 @@ const Form = () => {
         type="password"
         handleChange={handleChange}
       />
-      <button type="submit">Login</button>
+      <Button type="submit" label="Login" />
     </form>
   );
 };
