@@ -4,14 +4,20 @@ import Button from "./button";
 
 const formStyles = {
   width: "50%",
-  margin: "30px auto",
-  padding: "0"
+  margin: "60px auto",
+  padding: "10px"
 };
 
 const Form = () => {
   const emptyForm = {
-    username: "",
-    password: ""
+    username: {
+      data: "",
+      errors: false
+    },
+    password: {
+      data: "",
+      errors: false
+    }
   };
 
   const [userForm, setUserForm] = useState(emptyForm);
@@ -19,24 +25,31 @@ const Form = () => {
   const handleChange = ({ target }) => {
     setUserForm((prevFormData) => ({
       ...prevFormData,
-      [target.name]: target.value
+      [target.name]: {
+        data: target.value,
+        errors: false
+      }
     }));
     console.log(`userForm : ${JSON.stringify(userForm)}`);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
-    <form style={formStyles}>
+    <form onSubmit={(e) => handleSubmit(e)} style={formStyles}>
       <Input
         name="username"
         label="Username"
-        value={userForm.username}
+        value={userForm.username.data}
         type="text"
         handleChange={handleChange}
       />
       <Input
         name="password"
         label="Password"
-        value={userForm.password}
+        value={userForm.password.data}
         type="password"
         handleChange={handleChange}
       />
