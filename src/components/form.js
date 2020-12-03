@@ -32,7 +32,6 @@ const Form = () => {
         errors: false
       }
     }));
-    console.log(`userForm : ${JSON.stringify(userForm)}`);
   };
 
   const handleSubmit = (e) => {
@@ -41,7 +40,6 @@ const Form = () => {
 
     const currentForm = userForm;
     for (let field in currentForm) {
-      console.log(`data =>`, currentForm[field].data);
       if (
         undefined !== currentForm[field].data &&
         !currentForm[field].data.length
@@ -51,7 +49,9 @@ const Form = () => {
       }
     }
     setUserForm((prevFormData) => ({ ...currentForm }));
-    console.log(`userForm : ${JSON.stringify(userForm)}`);
+    if (errorCounts === 0) {
+      console.log(`No Errors in the Form. Good to submit !`);
+    }
   };
 
   return (
