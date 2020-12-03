@@ -1,7 +1,7 @@
 import React from "react";
 
 const inputStyles = {
-  margin: "5px 0 30px",
+  margin: "5px 0 0px",
   padding: "10px",
   display: "block",
   width: "100%",
@@ -16,7 +16,7 @@ const inputStyles = {
 };
 
 const labelStyles = {
-  margin: "0",
+  margin: "32px 0 0",
   padding: "0",
   display: "block",
   textAlign: "left",

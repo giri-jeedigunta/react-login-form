@@ -1,14 +1,15 @@
 import React from "react";
 
 const buttonStyles = {
-  margin: "0 auto",
+  margin: "30px auto",
   padding: "10px 20px",
   textAlign: "center",
   fontSize: "16px",
   lineHeight: "20px",
   fontFamily: "inherit",
   fontWeight: "bold",
-  letterSpacing: "1px"
+  letterSpacing: "1px",
+  clear: "both"
 };
 
 const Button = ({ type, label }) => {

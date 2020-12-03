@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Input from "./input";
 import Button from "./button";
+import ErrorMessage from "./errorMessage";
 
 const formStyles = {
   width: "50%",
@@ -21,6 +22,7 @@ const Form = () => {
   };
 
   const [userForm, setUserForm] = useState(emptyForm);
+  const [errorCounts, updateErrorCounts] = useState(0);
 
   const handleChange = ({ target }) => {
     setUserForm((prevFormData) => ({
@@ -35,6 +37,21 @@ const Form = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    updateErrorCounts(0);
+
+    const currentForm = userForm;
+    for (let field in currentForm) {
+      console.log(`data =>`, currentForm[field].data);
+      if (
+        undefined !== currentForm[field].data &&
+        !currentForm[field].data.length
+      ) {
+        updateErrorCounts((errorCounts) => errorCounts + 1);
+        currentForm[field].errors = `Invalid ${field} !!!`;
+      }
+    }
+    setUserForm((prevFormData) => ({ ...currentForm }));
+    console.log(`userForm : ${JSON.stringify(userForm)}`);
   };
 
   return (
@@ -46,6 +63,9 @@ const Form = () => {
         type="text"
         handleChange={handleChange}
       />
+      {userForm.username.errors.length && (
+        <ErrorMessage text={userForm.username.errors} />
+      )}
       <Input
         name="password"
         label="Password"
@@ -53,7 +73,11 @@ const Form = () => {
         type="password"
         handleChange={handleChange}
       />
+      {userForm.password.errors.length && (
+        <ErrorMessage text={userForm.password.errors} />
+      )}
       <Button type="submit" label="Login" />
+      {errorCounts}
     </form>
   );
 };
